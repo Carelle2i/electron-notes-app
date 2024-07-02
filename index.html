@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Notes App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f9f9f9;
+    }
+    #note-input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+    #save-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    #notes-list {
+      margin-top: 20px;
+    }
+    .note-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      margin-bottom: 5px;
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .delete-button {
+      background-color: #f44336;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Notes App</h1>
+  <input type="text" id="note-input" placeholder="Enter your note here..." />
+  <button id="save-button">Enregistrer</button>
+  <div id="notes-list"></div>
+  <script src="renderer.js"></script>
+</body>
+</html>
