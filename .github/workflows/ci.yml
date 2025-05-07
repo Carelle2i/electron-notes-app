@@ -1,0 +1,49 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+      - name: Run SonarQube analysis
+        run: |
+          sonar-scanner \
+            -Dsonar.projectKey=electron-notes-app \
+            -Dsonar.organization=your-sonar-org \
+            -Dsonar.host.url=http://localhost:9000 \
+            -Dsonar.login=$SONAR_TOKEN
+
+      - name: Run Trivy scan for vulnerabilities in dependencies
+        run: |
+          trivy fs --security-checks vuln --format json --output trivy-report.json .
+
+      - name: Upload Trivy report
+        uses: actions/upload-artifact@v2
+        with:
+          name: trivy-report
+          path: trivy-report.json
+
+      - name: Deploy to staging
+        run: ./deploy.sh
