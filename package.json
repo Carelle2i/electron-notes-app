@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
-    "test": "cypress run",
+    "test": "mocha test/app.spec.js",
     "start": "electron ."
   },
   "keywords": [],
